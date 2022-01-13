@@ -86,7 +86,8 @@ in
     };
 
     fakeRootCommands = ''
-    mkdir -p ./tmp ./usr/bin ./root/static
+    mkdir -p ./tmp ./usr/bin ./root/static ./etc
+    echo "ID=nixos" > ./etc/os-release
     cp ./bin/env ./usr/bin/
 
     ${the-lab.fonts { prefix = "./root/"; }}

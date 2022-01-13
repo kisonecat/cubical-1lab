@@ -80,7 +80,6 @@ in
       static-agda
 
       # Needed for Github Actions:
-      cacert
       rsync
     ];
 
@@ -92,8 +91,8 @@ in
         
         # Needed for Github Actions:
         "LD_LIBRARY_PATH=${lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}"
-        "GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt"
-        "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+        "GIT_SSL_CAINFO=${cacert}/etc/ssl/certs/ca-bundle.crt"
+        "SSL_CERT_FILE=${cacert}/etc/ssl/certs/ca-bundle.crt"
       ];
     };
 

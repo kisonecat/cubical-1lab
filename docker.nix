@@ -75,8 +75,15 @@ in
 
     maxLayers = 10;
 
-    contents = [ pkgs.pkgsStatic.busybox rsync static-agda ]
-              ++ the-lab.deps;
+    contents = the-lab.deps ++ [ 
+      pkgs.pkgsStatic.busybox # Need a shell, so go with static busybox
+      static-agda
+
+      # Needed for Github Actions:
+      cacert
+      rsync
+    ];
+
     config = {
       WorkingDir = "/workspace";
       Env = [

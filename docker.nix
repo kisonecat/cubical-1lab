@@ -82,11 +82,14 @@ in
       Env = [
         "LANG=C.UTF-8" # Needed for GHC to set the correct encoding on handles
         "PATH=/lib/node_modules/.bin/:/bin/"
+        
+        # Needed for Github Actions:
+        "LD_LIBRARY_PATH=${lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}"
       ];
     };
 
     fakeRootCommands = ''
-    mkdir -p ./tmp ./usr/bin ./root/static ./etc
+    mkdir -p ./tmp ./lib64 ./usr/bin ./root/static ./etc
     echo "ID=nixos" > ./etc/os-release
     cp ./bin/env ./usr/bin/
 
@@ -94,5 +97,8 @@ in
 
     mkdir -p ./root/static/otf
     cp ${gyre-fonts}/share/fonts/truetype/texgyrepagella*.otf ./root/static/otf -rv
+
+    # Needed for Github Actions
+    ln -s ${pkgs.glibc}/lib/ld-linux-x86-64.so.2 ./lib64/ld-linux-x86-64.so.2
     '';
   }

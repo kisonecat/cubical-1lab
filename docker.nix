@@ -92,6 +92,8 @@ in
         
         # Needed for Github Actions:
         "LD_LIBRARY_PATH=${lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}"
+        "GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt"
+        "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
       ];
     };
 
